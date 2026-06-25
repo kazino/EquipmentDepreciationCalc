@@ -22,7 +22,6 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0fafb; color: var(--text); min-height: 100vh; }
-
   .header { background: var(--hhmi-navy); color: white; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
   .logo-area { display: flex; align-items: center; gap: 14px; }
   .logo-mark { width: 44px; height: 44px; background: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -31,16 +30,13 @@
   .logo-text .org { font-size: 11px; font-weight: 400; opacity: 0.75; letter-spacing: 0.5px; text-transform: uppercase; }
   .logo-text .title { font-size: 17px; font-weight: 700; letter-spacing: 0.2px; }
   .header-badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 14px; font-size: 12px; font-weight: 500; white-space: nowrap; }
-
   .container { max-width: 1300px; margin: 0 auto; padding: 24px 20px 60px; }
-
   .date-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 20px; box-shadow: 0 1px 4px rgba(3,77,82,0.07); }
   .date-card label { font-weight: 600; font-size: 14px; color: var(--hhmi-navy); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
   .date-input { border: 2px solid var(--border); border-radius: 7px; padding: 8px 12px; font-size: 15px; font-family: inherit; color: var(--text); background: white; cursor: pointer; transition: border-color 0.15s; }
   .date-input:focus { outline: none; border-color: var(--hhmi-blue); }
   .date-hint { font-size: 12px; color: var(--muted); margin-left: 4px; }
   .date-card .spacer { flex: 1; }
-
   .summary-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 20px; }
   .summary-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 4px rgba(3,77,82,0.07); }
   .summary-card .s-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted); margin-bottom: 6px; }
@@ -48,7 +44,6 @@
   .summary-card.highlight { background: var(--hhmi-navy); border-color: var(--hhmi-navy); }
   .summary-card.highlight .s-label { color: rgba(255,255,255,0.65); }
   .summary-card.highlight .s-value { color: white; }
-
   .table-card { background: white; border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 1px 4px rgba(3,77,82,0.07); overflow: hidden; margin-bottom: 16px; }
   .table-header { background: var(--hhmi-navy); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
   .table-header h2 { color: white; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
@@ -61,7 +56,6 @@
   .btn-export:hover { background: #035f65; }
   .table-actions { display: flex; gap: 8px; flex-wrap: wrap; }
   .scroll-wrap { overflow-x: auto; }
-
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   thead th { background: var(--hhmi-light-blue); color: var(--hhmi-navy); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px; border-bottom: 2px solid var(--border); white-space: nowrap; text-align: left; position: sticky; top: 0; }
   thead th:first-child { width: 40px; text-align: center; }
@@ -88,17 +82,13 @@
   tfoot td { background: var(--hhmi-light-blue); font-weight: 700; padding: 10px; border-top: 2px solid var(--border); font-size: 13px; color: var(--hhmi-navy); text-align: right; padding-right: 12px; font-variant-numeric: tabular-nums; }
   tfoot td:first-child, tfoot td:nth-child(2) { text-align: left; }
   .th-tip { cursor: help; text-decoration: underline dotted; text-underline-offset: 2px; }
-
   .legend { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-top: 16px; font-size: 12.5px; color: var(--muted); line-height: 1.7; box-shadow: 0 1px 4px rgba(3,77,82,0.07); }
   .legend h3 { font-size: 12px; font-weight: 700; color: var(--hhmi-navy); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
   .legend-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 6px 24px; }
   .legend-item { display: flex; align-items: baseline; gap: 6px; }
   .legend-item strong { color: var(--hhmi-blue); font-size: 11.5px; min-width: 130px; flex-shrink: 0; }
-
   .note-badge { display: inline-block; background: var(--warn-bg); color: var(--warn); border-radius: 4px; padding: 2px 6px; font-size: 11px; font-weight: 600; white-space: nowrap; }
   .note-badge.ok { background: var(--success-bg); color: var(--success); }
-
-  /* ── CSV Modal ── */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
   .modal-overlay.open { display: flex; }
   .modal { background: white; border-radius: 12px; width: 100%; max-width: 680px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
@@ -108,11 +98,11 @@
   .modal-close:hover { background: rgba(255,255,255,0.2); }
   .modal-body { padding: 16px 20px; flex: 1; overflow: auto; }
   .modal-body p { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+  .modal-body p strong { color: var(--hhmi-navy); }
   .csv-textarea { width: 100%; height: 260px; font-family: 'Courier New', monospace; font-size: 11px; border: 1px solid var(--border); border-radius: 6px; padding: 10px; resize: vertical; color: var(--text); background: #f8fefe; }
   .modal-foot { padding: 12px 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end; align-items: center; }
   .copy-feedback { font-size: 12px; color: var(--success); font-weight: 600; opacity: 0; transition: opacity 0.3s; }
   .copy-feedback.show { opacity: 1; }
-
   @media (max-width: 680px) {
     .header { height: auto; padding: 12px 16px; }
     .header-badge { display: none; }
@@ -139,7 +129,6 @@
 </header>
 
 <div class="container">
-
   <div class="date-card">
     <label>
       <svg width="18" height="18" fill="none" stroke="#034d52" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -183,9 +172,9 @@
             <th>HHMI PO</th>
             <th style="text-align:right">Original Price</th>
             <th>Purchase Date</th>
-            <th class="calc"><span class="th-tip" title="(Reference Date − Purchase Date) ÷ 365 × 12">Age (mos.)</span></th>
-            <th class="calc"><span class="th-tip" title="(Price ÷ 36) × (36 − Age)">Calc. Value</span></th>
-            <th class="calc"><span class="th-tip" title="Price × 10%">Residual Value</span></th>
+            <th class="calc"><span class="th-tip" title="(Reference Date - Purchase Date) / 365 * 12">Age (mos.)</span></th>
+            <th class="calc"><span class="th-tip" title="(Price / 36) * (36 - Age)">Calc. Value</span></th>
+            <th class="calc"><span class="th-tip" title="Price * 10%">Residual Value</span></th>
             <th class="result"><span class="th-tip" title="MAX(Calculated Value, Residual Value)">Cost to Purchase</span></th>
             <th class="calc">Notes</th>
             <th style="width:36px"></th>
@@ -210,28 +199,27 @@
   <div class="legend">
     <h3>Formula Reference</h3>
     <div class="legend-grid">
-      <div class="legend-item"><strong>Age (months)</strong><span>= (Leaving Date − Purchase Date) ÷ 365 × 12</span></div>
-      <div class="legend-item"><strong>Calculated Value</strong><span>= (Price ÷ 36) × (36 − Age) — straight-line 36-month depreciation</span></div>
-      <div class="legend-item"><strong>Residual Value</strong><span>= Price × 10% — minimum floor value</span></div>
-      <div class="legend-item"><strong>Cost to Purchase</strong><span>= MAX(Calculated Value, Residual Value) — never below 10%</span></div>
+      <div class="legend-item"><strong>Age (months)</strong><span>= (Leaving Date - Purchase Date) / 365 * 12</span></div>
+      <div class="legend-item"><strong>Calculated Value</strong><span>= (Price / 36) * (36 - Age) - straight-line 36-month depreciation</span></div>
+      <div class="legend-item"><strong>Residual Value</strong><span>= Price * 10% - minimum floor value</span></div>
+      <div class="legend-item"><strong>Cost to Purchase</strong><span>= MAX(Calculated Value, Residual Value) - never below 10%</span></div>
     </div>
   </div>
-
 </div>
 
-<!-- CSV Export Modal -->
+<!-- Export Modal -->
 <div class="modal-overlay" id="csvModal" onclick="closeModalOutside(event)">
   <div class="modal">
     <div class="modal-head">
-      <h3>Export CSV</h3>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <h3>Export to Excel / CSV</h3>
+      <button class="modal-close" onclick="closeModal()">&#x2715;</button>
     </div>
     <div class="modal-body">
-      <p>Copy the text below and paste into a text editor, then save as a <strong>.csv</strong> file — or paste directly into Excel/Google Sheets.</p>
+      <p>Click <strong>Copy to Clipboard</strong>, then paste directly into Excel or Google Sheets &mdash; columns will split automatically.</p>
       <textarea class="csv-textarea" id="csvText" readonly></textarea>
     </div>
     <div class="modal-foot">
-      <span class="copy-feedback" id="copyFeedback">✓ Copied!</span>
+      <span class="copy-feedback" id="copyFeedback">&#x2713; Copied!</span>
       <button class="btn btn-primary" style="color:var(--hhmi-navy);border:1px solid var(--border)" onclick="closeModal()">Close</button>
       <button class="btn btn-export" onclick="copyCSV()">Copy to Clipboard</button>
     </div>
@@ -242,7 +230,7 @@
   let rows = [];
   let nextId = 1;
 
-  const fmt = v => isNaN(v) || v === null ? '—' : '$' + v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const fmt = v => isNaN(v) || v === null ? '-' : '$' + v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
   const refDateEl = document.getElementById('refDate');
   refDateEl.value = new Date().toISOString().split('T')[0];
@@ -253,9 +241,10 @@
     return v ? new Date(v + 'T00:00:00') : null;
   }
 
-  function addRow(data = {}) {
+  function addRow(data) {
+    data = data || {};
     const id = nextId++;
-    const row = { id, desc: data.desc||'', serial: data.serial||'', po: data.po||'', price: data.price!=null ? data.price : '', purchaseDate: data.purchaseDate||'' };
+    const row = { id: id, desc: data.desc||'', serial: data.serial||'', po: data.po||'', price: data.price!=null ? data.price : '', purchaseDate: data.purchaseDate||'' };
     rows.push(row);
     renderRow(row);
     recalcAll();
@@ -265,20 +254,20 @@
     const tbody = document.getElementById('tableBody');
     const tr = document.createElement('tr');
     tr.id = 'row-' + row.id;
-    tr.innerHTML = `
-      <td class="row-num"></td>
-      <td><input class="td-input desc-col" placeholder="e.g. MacBook Pro" value="${esc(row.desc)}" onchange="updateRow(${row.id},'desc',this.value)"></td>
-      <td><input class="td-input serial-col" placeholder="Serial #" value="${esc(row.serial)}" onchange="updateRow(${row.id},'serial',this.value)"></td>
-      <td><input class="td-input po-col" placeholder="PO #" value="${esc(row.po)}" onchange="updateRow(${row.id},'po',this.value)"></td>
-      <td><input class="td-input currency" type="number" min="0" step="0.01" placeholder="0.00" value="${row.price!=='' ? row.price : ''}" oninput="updateRow(${row.id},'price',this.value)"></td>
-      <td><input class="td-input date-col" type="date" value="${row.purchaseDate}" onchange="updateRow(${row.id},'purchaseDate',this.value)"></td>
-      <td class="calc-cell" id="age-${row.id}">—</td>
-      <td class="calc-cell" id="calcVal-${row.id}">—</td>
-      <td class="calc-cell" id="residual-${row.id}">—</td>
-      <td class="result-cell" id="cost-${row.id}">—</td>
-      <td id="note-${row.id}"></td>
-      <td><button class="delete-btn" onclick="deleteRow(${row.id})" title="Remove">✕</button></td>
-    `;
+    const id = row.id;
+    tr.innerHTML =
+      '<td class="row-num"></td>' +
+      '<td><input class="td-input desc-col" placeholder="e.g. MacBook Pro" value="' + esc(row.desc) + '" onchange="updateRow(' + id + ',\'desc\',this.value)"></td>' +
+      '<td><input class="td-input serial-col" placeholder="Serial #" value="' + esc(row.serial) + '" onchange="updateRow(' + id + ',\'serial\',this.value)"></td>' +
+      '<td><input class="td-input po-col" placeholder="PO #" value="' + esc(row.po) + '" onchange="updateRow(' + id + ',\'po\',this.value)"></td>' +
+      '<td><input class="td-input currency" type="number" min="0" step="0.01" placeholder="0.00" value="' + (row.price !== '' ? row.price : '') + '" oninput="updateRow(' + id + ',\'price\',this.value)"></td>' +
+      '<td><input class="td-input date-col" type="date" value="' + row.purchaseDate + '" onchange="updateRow(' + id + ',\'purchaseDate\',this.value)"></td>' +
+      '<td class="calc-cell" id="age-' + id + '">-</td>' +
+      '<td class="calc-cell" id="calcVal-' + id + '">-</td>' +
+      '<td class="calc-cell" id="residual-' + id + '">-</td>' +
+      '<td class="result-cell" id="cost-' + id + '">-</td>' +
+      '<td id="note-' + id + '"></td>' +
+      '<td><button class="delete-btn" onclick="deleteRow(' + id + ')" title="Remove">&#x2715;</button></td>';
     tbody.appendChild(tr);
     updateRowNumbers();
   }
@@ -286,7 +275,7 @@
   function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
 
   function updateRow(id, field, value) {
-    const row = rows.find(r => r.id === id);
+    const row = rows.find(function(r) { return r.id === id; });
     if (!row) return;
     if (field === 'price') row.price = value !== '' ? parseFloat(value) : '';
     else row[field] = value;
@@ -294,7 +283,7 @@
   }
 
   function deleteRow(id) {
-    rows = rows.filter(r => r.id !== id);
+    rows = rows.filter(function(r) { return r.id !== id; });
     const tr = document.getElementById('row-' + id);
     if (tr) tr.remove();
     updateRowNumbers();
@@ -309,17 +298,17 @@
   }
 
   function updateRowNumbers() {
-    document.querySelectorAll('#tableBody tr').forEach((tr, i) => {
-      const td = tr.querySelector('.row-num');
+    const trs = document.querySelectorAll('#tableBody tr');
+    for (let i = 0; i < trs.length; i++) {
+      const td = trs[i].querySelector('.row-num');
       if (td) td.textContent = i + 1;
-    });
+    }
   }
 
   function recalcAll() {
     const refDate = getRefDate();
     let totalOriginal=0, totalCalc=0, totalResidual=0, totalCost=0, itemCount=0;
-
-    rows.forEach(row => {
+    rows.forEach(function(row) {
       const price = typeof row.price === 'number' && !isNaN(row.price) ? row.price : null;
       const pd = row.purchaseDate ? new Date(row.purchaseDate + 'T00:00:00') : null;
       const ageEl = document.getElementById('age-'+row.id);
@@ -328,34 +317,28 @@
       const costEl = document.getElementById('cost-'+row.id);
       const noteEl = document.getElementById('note-'+row.id);
       if (!ageEl) return;
-
       if (price === null || !pd || !refDate) {
-        ageEl.textContent = calcEl.textContent = residualEl.textContent = costEl.textContent = '—';
+        ageEl.textContent = calcEl.textContent = residualEl.textContent = costEl.textContent = '-';
         if (noteEl) noteEl.innerHTML = '';
         return;
       }
-
       const ageMos = (refDate - pd) / (1000*60*60*24) / 365 * 12;
       const calcVal = (price / 36) * (36 - ageMos);
       const residualVal = price * 0.1;
       const costVal = Math.max(calcVal, residualVal);
       const usedResidual = calcVal <= residualVal;
-
       ageEl.textContent = ageMos.toFixed(1);
       calcEl.textContent = fmt(Math.max(0, calcVal));
       residualEl.textContent = fmt(residualVal);
       costEl.textContent = fmt(costVal);
       costEl.className = 'result-cell' + (usedResidual ? ' residual-floor' : '');
-
       if (noteEl) {
         if (ageMos > 36) noteEl.innerHTML = '<span class="note-badge">Fully depreciated</span>';
         else if (usedResidual) noteEl.innerHTML = '<span class="note-badge">Residual floor applied</span>';
         else noteEl.innerHTML = '<span class="note-badge ok">Depreciating</span>';
       }
-
       if (price > 0) { totalOriginal+=price; totalCalc+=Math.max(0,calcVal); totalResidual+=residualVal; totalCost+=costVal; itemCount++; }
     });
-
     document.getElementById('sumItems').textContent = itemCount;
     document.getElementById('sumOriginal').textContent = fmt(totalOriginal);
     document.getElementById('sumCalc').textContent = fmt(totalCalc);
@@ -367,12 +350,14 @@
     document.getElementById('footCost').textContent = fmt(totalCost);
   }
 
-  function buildCSVContent() {
+  // Tab-separated so pasting into Excel/Sheets auto-splits into columns
+  function buildExportContent() {
     const refDate = refDateEl.value || 'N/A';
     const refDateObj = getRefDate();
+    const SEP = '\t';
     const headers = ['Line','Description','Serial Number','HHMI PO','Original Price','Purchase Date','Age (months)','Calculated Value','Residual Value','Cost to Purchase'];
-    const csvRows = [headers.join(',')];
-    rows.forEach((row, i) => {
+    const out = ['Reference Date (Leaving): ' + refDate, '', headers.join(SEP)];
+    rows.forEach(function(row, i) {
       const price = typeof row.price === 'number' ? row.price : '';
       const pd = row.purchaseDate ? new Date(row.purchaseDate + 'T00:00:00') : null;
       let age='', calcVal='', residual='', cost='';
@@ -385,41 +370,35 @@
         residual = rv.toFixed(2);
         cost = Math.max(cv,rv).toFixed(2);
       }
-      const fields = [i+1, row.desc, row.serial, row.po, price!==''?price.toFixed(2):'', row.purchaseDate, age, calcVal, residual, cost];
-      csvRows.push(fields.map(f => '"'+String(f).replace(/"/g,'""')+'"').join(','));
+      out.push([i+1, row.desc, row.serial, row.po, price!==''?price.toFixed(2):'', row.purchaseDate, age, calcVal, residual, cost].join(SEP));
     });
-    return `Reference Date (Leaving): ${refDate}\n\n` + csvRows.join('\n');
+    return out.join('\n');
   }
 
   function exportCSV() {
-    const csvContent = buildCSVContent();
-
-    // Try direct download first (works outside iframes)
+    const content = buildExportContent();
+    document.getElementById('csvText').value = content;
+    document.getElementById('csvModal').classList.add('open');
     try {
-      const blob = new Blob([csvContent], {type:'text/csv'});
+      const blob = new Blob([content], {type: 'text/tab-separated-values'});
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `HHMI_Equipment_Depreciation_${refDateEl.value||'export'}.csv`;
+      a.download = 'HHMI_Equipment_Depreciation_' + (refDateEl.value||'export') + '.tsv';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch(e) {}
-
-    // Always show modal as fallback (needed in Notion embeds / sandboxed iframes)
-    document.getElementById('csvText').value = csvContent;
-    document.getElementById('csvModal').classList.add('open');
   }
 
   function copyCSV() {
     const textarea = document.getElementById('csvText');
     textarea.select();
     textarea.setSelectionRange(0, 999999);
-    let copied = false;
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(textarea.value).then(() => showCopied()).catch(() => {
-        try { document.execCommand('copy'); showCopied(); } catch(e) {}
+      navigator.clipboard.writeText(textarea.value).then(showCopied).catch(function() {
+        try { document.execCommand('copy'); showCopied(); } catch(e2) {}
       });
     } else {
       try { document.execCommand('copy'); showCopied(); } catch(e) {}
@@ -429,7 +408,7 @@
   function showCopied() {
     const fb = document.getElementById('copyFeedback');
     fb.classList.add('show');
-    setTimeout(() => fb.classList.remove('show'), 2000);
+    setTimeout(function() { fb.classList.remove('show'); }, 2000);
   }
 
   function closeModal() { document.getElementById('csvModal').classList.remove('open'); }
