@@ -89,6 +89,13 @@
   .legend-item strong { color: var(--hhmi-blue); font-size: 11.5px; min-width: 130px; flex-shrink: 0; }
   .note-badge { display: inline-block; background: var(--warn-bg); color: var(--warn); border-radius: 4px; padding: 2px 6px; font-size: 11px; font-weight: 600; white-space: nowrap; }
   .note-badge.ok { background: var(--success-bg); color: var(--success); }
+  /* Confirm modal */
+  .confirm-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+  .confirm-overlay.open { display: flex; }
+  .confirm-box { background: white; border-radius: 10px; padding: 24px; max-width: 340px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); text-align: center; }
+  .confirm-box p { font-size: 14px; color: var(--text); margin-bottom: 20px; }
+  .confirm-box .confirm-btns { display: flex; gap: 10px; justify-content: center; }
+  /* Export Modal */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
   .modal-overlay.open { display: flex; }
   .modal { background: white; border-radius: 12px; width: 100%; max-width: 680px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
@@ -158,7 +165,7 @@
         Equipment Inventory
       </h2>
       <div class="table-actions">
-        <button class="btn btn-danger" onclick="clearAll()">Clear All</button>
+        <button class="btn btn-danger" onclick="confirmClear()">Clear All</button>
         <button class="btn btn-primary" onclick="addRow()">+ Add Item</button>
       </div>
     </div>
@@ -203,6 +210,17 @@
       <div class="legend-item"><strong>Calculated Value</strong><span>= (Price / 36) * (36 - Age) - straight-line 36-month depreciation</span></div>
       <div class="legend-item"><strong>Residual Value</strong><span>= Price * 10% - minimum floor value</span></div>
       <div class="legend-item"><strong>Cost to Purchase</strong><span>= MAX(Calculated Value, Residual Value) - never below 10%</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Clear Modal -->
+<div class="confirm-overlay" id="confirmModal">
+  <div class="confirm-box">
+    <p>Clear all rows?</p>
+    <div class="confirm-btns">
+      <button class="btn btn-primary" style="color:var(--hhmi-navy);border:1px solid var(--border)" onclick="closeConfirm()">Cancel</button>
+      <button class="btn btn-danger" style="background:#e53e3e;color:white;" onclick="doClear()">Clear All</button>
     </div>
   </div>
 </div>
@@ -290,8 +308,17 @@
     recalcAll();
   }
 
-  function clearAll() {
-    if (rows.length > 0 && !confirm('Clear all rows?')) return;
+  function confirmClear() {
+    if (rows.length === 0) return;
+    document.getElementById('confirmModal').classList.add('open');
+  }
+
+  function closeConfirm() {
+    document.getElementById('confirmModal').classList.remove('open');
+  }
+
+  function doClear() {
+    closeConfirm();
     rows = [];
     document.getElementById('tableBody').innerHTML = '';
     recalcAll();
@@ -350,7 +377,6 @@
     document.getElementById('footCost').textContent = fmt(totalCost);
   }
 
-  // Tab-separated so pasting into Excel/Sheets auto-splits into columns
   function buildExportContent() {
     const refDate = refDateEl.value || 'N/A';
     const refDateObj = getRefDate();
