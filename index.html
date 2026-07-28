@@ -85,13 +85,11 @@
   .legend-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 6px 24px; }
   .legend-item { display: flex; align-items: baseline; gap: 6px; }
   .legend-item strong { color: var(--hhmi-blue); font-size: 11.5px; min-width: 140px; flex-shrink: 0; }
-  /* Confirm modal */
   .confirm-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
   .confirm-overlay.open { display: flex; }
   .confirm-box { background: white; border-radius: 10px; padding: 24px; max-width: 340px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); text-align: center; }
   .confirm-box p { font-size: 14px; color: var(--text); margin-bottom: 20px; }
   .confirm-box .confirm-btns { display: flex; gap: 10px; justify-content: center; }
-  /* Export Modal */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
   .modal-overlay.open { display: flex; }
   .modal { background: white; border-radius: 12px; width: 100%; max-width: 680px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
@@ -133,7 +131,6 @@
 
 <div class="container">
 
-  <!-- Date + Export -->
   <div class="date-card">
     <label>
       <svg width="18" height="18" fill="none" stroke="#034d52" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -148,14 +145,12 @@
     </button>
   </div>
 
-  <!-- Summary -->
   <div class="summary-strip">
     <div class="summary-card"><div class="s-label">Items</div><div class="s-value" id="sumItems">0</div></div>
     <div class="summary-card"><div class="s-label">Total Original Value</div><div class="s-value" id="sumOriginal">$0.00</div></div>
     <div class="summary-card highlight"><div class="s-label">Total Cost to Purchase</div><div class="s-value" id="sumCost">$0.00</div></div>
   </div>
 
-  <!-- Table -->
   <div class="table-card">
     <div class="table-header">
       <h2>
@@ -197,7 +192,6 @@
     </div>
   </div>
 
-  <!-- Legend -->
   <div class="legend">
     <h3>Formula Reference</h3>
     <div class="legend-grid">
@@ -223,11 +217,11 @@
 <div class="modal-overlay" id="csvModal" onclick="closeModalOutside(event)">
   <div class="modal">
     <div class="modal-head">
-      <h3>Export to Excel / CSV</h3>
+      <h3>Export CSV</h3>
       <button class="modal-close" onclick="closeModal()">&#x2715;</button>
     </div>
     <div class="modal-body">
-      <p>Click <strong>Copy to Clipboard</strong>, then paste directly into Excel or Google Sheets &mdash; columns will split automatically.</p>
+      <p>Click <strong>Copy to Clipboard</strong> to paste directly into Excel or Google Sheets (columns split automatically), or use the downloaded <strong>.csv</strong> file.</p>
       <textarea class="csv-textarea" id="csvText" readonly></textarea>
     </div>
     <div class="modal-foot">
@@ -255,21 +249,16 @@
     return v ? new Date(v + 'T00:00:00') : null;
   }
 
-  // DATEDIF "m" equivalent: whole completed months between two dates
+  // DATEDIF "m": whole completed months between two dates
   function datedifMonths(start, end) {
     let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
     if (end.getDate() < start.getDate()) months--;
     return Math.max(0, months);
   }
 
-  // Excel formula: MAX(price - SLN(price, price*0.1, 3)/12 * months, price*0.1)
-  // SLN(cost, salvage, life) = (cost - salvage) / life = (price - price*0.1) / 3 = price*0.9/3 (annual)
-  // monthly depreciation = price*0.9/36
-  // cost to purchase = MAX(price - (price*0.9/36)*months, price*0.1)
+  // MAX(price - (price*0.9/36)*months, price*0.1)
   function calcCost(price, months) {
-    var monthlyDep = (price * 0.9) / 36;
-    var val = price - monthlyDep * months;
-    return Math.max(val, price * 0.1);
+    return Math.max(price - (price * 0.9 / 36) * months, price * 0.1);
   }
 
   function addRow(data) {
@@ -340,33 +329,23 @@
   function recalcAll() {
     const refDate = getRefDate();
     let totalOriginal = 0, totalCost = 0, itemCount = 0;
-
     rows.forEach(function(row) {
       const price = typeof row.price === 'number' && !isNaN(row.price) ? row.price : null;
       const pd = row.purchaseDate ? new Date(row.purchaseDate + 'T00:00:00') : null;
       const ageEl = document.getElementById('age-' + row.id);
       const costEl = document.getElementById('cost-' + row.id);
       if (!ageEl) return;
-
       if (price === null || !pd || !refDate) {
         ageEl.textContent = '-';
         costEl.textContent = '-';
         return;
       }
-
       const months = datedifMonths(pd, refDate);
       const cost = calcCost(price, months);
-
       ageEl.textContent = months;
       costEl.textContent = fmt(cost);
-
-      if (price > 0) {
-        totalOriginal += price;
-        totalCost += cost;
-        itemCount++;
-      }
+      if (price > 0) { totalOriginal += price; totalCost += cost; itemCount++; }
     });
-
     document.getElementById('sumItems').textContent = itemCount;
     document.getElementById('sumOriginal').textContent = fmt(totalOriginal);
     document.getElementById('sumCost').textContent = fmt(totalCost);
@@ -374,13 +353,9 @@
     document.getElementById('footCost').textContent = fmt(totalCost);
   }
 
-  function buildExportContent() {
-    const refDate = refDateEl.value || 'N/A';
+  function getRowData() {
     const refDateObj = getRefDate();
-    const SEP = '\t';
-    const headers = ['Line', 'HHMI PO #', 'Original Purchase Price', 'Date Purchased', 'Device Age at Departure (Months)', 'Cost to Purchase from HHMI', 'Notes'];
-    const out = ['Date Leaving HHMI: ' + refDate, '', headers.join(SEP)];
-    rows.forEach(function(row, i) {
+    return rows.map(function(row, i) {
       const price = typeof row.price === 'number' ? row.price : '';
       const pd = row.purchaseDate ? new Date(row.purchaseDate + 'T00:00:00') : null;
       let age = '', cost = '';
@@ -388,21 +363,43 @@
         age = datedifMonths(pd, refDateObj);
         cost = calcCost(price, age).toFixed(2);
       }
-      out.push([i+1, row.po, price !== '' ? price.toFixed(2) : '', row.purchaseDate, age, cost, row.notes].join(SEP));
+      return [i+1, row.po, price !== '' ? price.toFixed(2) : '', row.purchaseDate, age, cost, row.notes];
     });
-    return out.join('\n');
+  }
+
+  var HEADERS = ['Line', 'HHMI PO #', 'Original Purchase Price', 'Date Purchased', 'Device Age at Departure (Months)', 'Cost to Purchase from HHMI', 'Notes'];
+  var META = 'Date Leaving HHMI: ' + (refDateEl.value || 'N/A');
+
+  // Tab-separated for clipboard (pastes into columns in Excel/Sheets)
+  function buildTSV() {
+    var meta = 'Date Leaving HHMI: ' + (refDateEl.value || 'N/A');
+    var lines = [meta, '', HEADERS.join('\t')];
+    getRowData().forEach(function(r) { lines.push(r.join('\t')); });
+    return lines.join('\n');
+  }
+
+  // Comma-separated for .csv file download
+  function buildCSV() {
+    var meta = 'Date Leaving HHMI: ' + (refDateEl.value || 'N/A');
+    var lines = [meta, '', HEADERS.map(function(h) { return '"' + h + '"'; }).join(',')];
+    getRowData().forEach(function(r) {
+      lines.push(r.map(function(f) { return '"' + String(f).replace(/"/g, '""') + '"'; }).join(','));
+    });
+    return lines.join('\n');
   }
 
   function exportCSV() {
-    const content = buildExportContent();
-    document.getElementById('csvText').value = content;
+    // Show modal with tab-separated content for easy clipboard paste
+    document.getElementById('csvText').value = buildTSV();
     document.getElementById('csvModal').classList.add('open');
+
+    // Also trigger .csv file download
     try {
-      const blob = new Blob([content], {type: 'text/tab-separated-values'});
+      const blob = new Blob([buildCSV()], {type: 'text/csv'});
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'HHMI_Equipment_Depreciation_' + (refDateEl.value || 'export') + '.tsv';
+      a.download = 'HHMI_Equipment_Depreciation_' + (refDateEl.value || 'export') + '.csv';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
