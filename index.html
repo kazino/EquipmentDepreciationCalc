@@ -75,6 +75,9 @@
   .td-input.notes-col { min-width: 160px; }
   td.calc-cell { font-variant-numeric: tabular-nums; color: var(--hhmi-blue); font-weight: 500; text-align: right; padding-right: 14px; white-space: nowrap; }
   td.result-cell { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--hhmi-navy); text-align: right; padding-right: 14px; white-space: nowrap; font-size: 14px; }
+  tbody tr.over-36 td, tbody tr.over-36:hover td { background: #fde2e2 !important; }
+  tbody tr.over-36 td.calc-cell, tbody tr.over-36 td.result-cell { color: #b91c1c; font-weight: 700; }
+  tbody tr.over-36 .td-input.date-col { color: #b91c1c; font-weight: 700; }
   .delete-btn { background: none; border: none; cursor: pointer; color: #ccc; padding: 4px 6px; border-radius: 4px; transition: color 0.15s, background 0.15s; font-size: 16px; line-height: 1; }
   .delete-btn:hover { color: #e53e3e; background: #fff0f0; }
   tfoot td { background: var(--hhmi-light-blue); font-weight: 700; padding: 10px 12px; border-top: 2px solid var(--border); font-size: 13px; color: var(--hhmi-navy); text-align: right; padding-right: 14px; font-variant-numeric: tabular-nums; }
@@ -335,12 +338,15 @@
       const ageEl = document.getElementById('age-' + row.id);
       const costEl = document.getElementById('cost-' + row.id);
       if (!ageEl) return;
+      const trEl = document.getElementById('row-' + row.id);
+      if (trEl) trEl.classList.remove('over-36');
       if (price === null || !pd || !refDate) {
         ageEl.textContent = '-';
         costEl.textContent = '-';
         return;
       }
       const months = datedifMonths(pd, refDate);
+      if (trEl && months < 36) trEl.classList.add('over-36');
       const cost = calcCost(price, months);
       ageEl.textContent = months;
       costEl.textContent = fmt(cost);
